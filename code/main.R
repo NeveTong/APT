@@ -38,76 +38,101 @@ for (ind in c(41)) {
   # foreach::getDoParWorkers()
   
   print(system.time({
-  results <- foreach::foreach(i = 1:n_rep, .combine = "rbind", .multicombine = TRUE, .packages = c("highmean", "Hotelling")) %dopar% {
-    
-    set.seed(i)
-    
-    data_all <- generate_data()
-    obj_genX1 <- data_all$obj_genX1
-    obj_genX2 <- data_all$obj_genX2
-    Y1 <- obj_genX1$X
-    Y2 <- obj_genX2$X
-    
-    #### Bai and Saranadasa (1996)
-    print(system.time({
-      # apval_BS = highmean::apval_Bai1996(Y1, Y2)$pval
-      epval_BS = highmean::epval_Bai1996(Y1, Y2, n.iter=200)$pval
-    }))
-    
-    ### Xu G, Lin L, Wei P, and Pan W (2016)
-    print(system.time({
-      # apval_XLWP = highmean::apval_aSPU(Y1, Y2)$pval
-      epval_XLWP = highmean::epval_aSPU(Y1, Y2, n.iter=200)$pval[8]
-    }))
-    
-    ### Cai, Liu, and Xia (2014)
-    print(system.time({
-      # apval_CLX = highmean::apval_Cai2014(Y1, Y2)$pval
-      epval_CLX = highmean::epval_Cai2014(Y1, Y2, n.iter=200)$pval
-    }))
-    
-    ### Chen and Qin (2010)
-    print(system.time({
-      # apval_CQ = highmean::apval_Chen2010(Y1, Y2)$pval
-      epval_CQ = highmean::epval_Chen2010(Y1, Y2, n.iter=200)$pval
-    }))
-    
-    ### Chen, Li, and Zhong (2014/2019)
-    print(system.time({
-      # apval_CLZ = highmean::apval_Chen2014(Y1, Y2)$pval
-      epval_CLZ = highmean::epval_Chen2014(Y1, Y2, n.iter=200)$pval
-    }))
-    
-    ### Srivastava and Du (2008)
-    print(system.time({
-      # apval_SD = highmean::apval_Sri2008(Y1, Y2)$pval
-      epval_SD = highmean::epval_Sri2008(Y1, Y2, n.iter=200)$pval
-    }))
-    
-    #### Lopes, Jacob, and Wainwright (2011)
-    n = n1 + n2 - 2
-    P = matrix(rnorm(p * floor(n/2)), p, floor(n/2))
-    Z1 = Y1 %*% P
-    Z2 = Y2 %*% P
-    test = Hotelling::hotelling.test(x=Z1, y=Z2)
-    aRPT_pval = test$pval
-    
-    #### Li and Li (2021)
-    print(system.time({
-      LL_pval = epval_UprojTwoSample(Y1, Y2, B1 = 500, perm.iter = 200)
-    }))
-    # LL_pval=0
-    
-    #### PT and APT
-    print(system.time({
-      kap = 1/2
-      PT_APT = sim(p, n1, n2, kap, sigma, dsigma, mu1, mu2, obj_genX1, obj_genX2)
-      PT_rej = PT_APT$rej_norwt[2]
-      APT_rej = PT_APT$rej_rwt[2]
-    }))
-    # PT_rej=APT_rej=0
-    
-    return(c(epval_BS, epval_CQ, epval_SD, epval_CLZ, epval_CLX, epval_XLWP, aRPT_pval, LL_pval, PT_rej, APT_rej))
+  results <- foreach::foreach(i = 1:n_rep, .combine = "rbind", 
+                              .packages = c("highmean", "Hotelling")) %dopar% {
+                                
+                                set.seed(i)
+                                
+                                data_all <- generate_data()
+                                obj_genX1 <- data_all$obj_genX1
+                                obj_genX2 <- data_all$obj_genX2
+                                Y1 <- obj_genX1$X
+                                Y2 <- obj_genX2$X
+                                
+                                #### Bai and Saranadasa (1996)
+                                tryCatch({
+                                  epval_BS = highmean::epval_Bai1996(Y1, Y2, n.iter=200)$pval
+                                }, error = function(e) {
+                                  cat(paste0("Error in BS, iteration ", i, ": ", e))
+                                  epval_BS <- NA
+                                })
+                                
+                                ### Xu G, Lin L, Wei P, and Pan W (2016)
+                                tryCatch({
+                                  epval_XLWP = highmean::epval_aSPU(Y1, Y2, n.iter=200)$pval[8]
+                                }, error = function(e) {
+                                  cat(paste0("Error in XLWP, iteration ", i, ": ", e))
+                                  epval_XLWP <- NA
+                                })
+                                
+                                ### Cai, Liu, and Xia (2014)
+                                tryCatch({
+                                  epval_CLX = highmean::epval_Cai2014(Y1, Y2, n.iter=200)$pval
+                                }, error = function(e) {
+                                  cat(paste0("Error in CLX, iteration ", i, ": ", e))
+                                  epval_CLX <- NA
+                                })
+                                
+                                ### Chen and Qin (2010)
+                                tryCatch({
+                                  epval_CQ = highmean::epval_Chen2010(Y1, Y2, n.iter=200)$pval
+                                }, error = function(e) {
+                                  cat(paste0("Error in CQ, iteration ", i, ": ", e))
+                                  epval_CQ <- NA
+                                })
+                                
+                                ### Chen, Li, and Zhong (2014/2019)
+                                tryCatch({
+                                  epval_CLZ = highmean::epval_Chen2014(Y1, Y2, n.iter=200)$pval
+                                }, error = function(e) {
+                                  cat(paste0("Error in CLZ, iteration ", i, ": ", e))
+                                  epval_CLZ <- NA
+                                })
+                                
+                                
+                                ### Srivastava and Du (2008)
+                                tryCatch({
+                                  epval_SD = highmean::epval_Sri2008(Y1, Y2, n.iter=200)$pval
+                                }, error = function(e) {
+                                  cat(paste0("Error in SD, iteration ", i, ": ", e))
+                                  epval_SD <- NA
+                                })
+                                
+                                #### Lopes, Jacob, and Wainwright (2011)
+                                n = n1 + n2 - 2
+                                P = matrix(rnorm(p * floor(n/2)), p, floor(n/2))
+                                Z1 = Y1 %*% P
+                                Z2 = Y2 %*% P
+                                tryCatch({
+                                  test = Hotelling::hotelling.test(x=Z1, y=Z2)
+                                  aRPT_pval = test$pval
+                                }, error = function(e) {
+                                  cat(paste0("Error in RPT, iteration ", i, ": ", e))
+                                  aRPT_pval <- NA
+                                })
+                                
+                                #### Li and Li (2021)
+                                tryCatch({
+                                  LL_pval = epval_UprojTwoSample(Y1, Y2, B1 = 500, perm.iter = 200)
+                                }, error = function(e) {
+                                  cat(paste0("Error in LL, iteration ", i, ": ", e))
+                                  LL_pval <- NA
+                                })
+                                
+                                
+                                #### PT and APT
+                                tryCatch({
+                                  kap = 1/2
+                                  PT_APT = sim(p, n1, n2, kap, sigma, dsigma, mu1, mu2, obj_genX1, obj_genX2)
+                                  PT_rej = PT_APT$rej_norwt[2]
+                                  APT_rej = PT_APT$rej_rwt[2]
+                                }, error = function(e) {
+                                  cat(paste0("Error in PT, iteration ", i, ": ", e))
+                                  PT_rej <- NA
+                                  APT_rej <- NA
+                                })
+                                
+                                return(c(epval_BS, epval_CQ, epval_SD, epval_CLZ, epval_CLX, epval_XLWP, aRPT_pval, LL_pval, PT_rej, APT_rej))                            
   }
   }))
 
