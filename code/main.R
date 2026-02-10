@@ -5,7 +5,7 @@ r.args <- commandArgs(trailingOnly=T)
 print(r.args)
 id.model <- r.args[1]
 
-for (ind in c(1)) {
+for (ind in c(41)) {
   # ind <- 1
   id.model <- as.character(ind)
   print(paste0("Start Simulating Model ", id.model))
@@ -37,6 +37,7 @@ for (ind in c(1)) {
   # foreach::getDoParRegistered()
   # foreach::getDoParWorkers()
   
+  print(system.time({
   results <- foreach::foreach(i = 1:n_rep, .combine = "rbind", .multicombine = TRUE, .packages = c("highmean", "Hotelling")) %dopar% {
     
     set.seed(i)
@@ -108,6 +109,7 @@ for (ind in c(1)) {
     
     return(c(epval_BS, epval_CQ, epval_SD, epval_CLZ, epval_CLX, epval_XLWP, aRPT_pval, LL_pval, PT_rej, APT_rej))
   }
+  }))
 
   colnames(results) <- c("BS", "CQ", "SD", "CLZ", "CLX", "XLWP", "RPT", "LL", "PT", "APT")
   saveRDS(results, file = paste0(path.output, "raw/model_", id.model, ".rds"))

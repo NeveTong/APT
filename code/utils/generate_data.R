@@ -25,7 +25,8 @@ generate_data <- function() {
                    })
           },
           # unequal covariance 
-          "2" = { # proportionally different covariance
+          "2" = , # proportionally different covariance
+          "3" = { # general different covariance
             switch(id.distr.X,
                    "1" = { # normal
                      obj_genX1 <- gen_vecX(n1, p, mu1, dsigma1, type = "Normal")
@@ -47,7 +48,8 @@ generate_data <- function() {
                      obj_genX1 <- gen_vecX(n1, p, mu1, dsigma1, type = "Contaminated Normal3")
                      obj_genX2 <- gen_vecX(n2, p, mu2, dsigma2, type = "Contaminated Normal3")
                    })
-          })
+          }
+          )
   return(list(obj_genX1 = obj_genX1,
               obj_genX2 = obj_genX2))
 }
