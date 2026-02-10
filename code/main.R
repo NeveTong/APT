@@ -37,7 +37,7 @@ for (ind in c(1)) {
   # foreach::getDoParRegistered()
   # foreach::getDoParWorkers()
   
-  results <- foreach::foreach(i = 1:20, .combine = "rbind", .multicombine = TRUE, .packages = c("highmean", "Hotelling")) %dopar% {
+  results <- foreach::foreach(i = 1:n_rep, .combine = "rbind", .multicombine = TRUE, .packages = c("highmean", "Hotelling")) %dopar% {
     
     set.seed(i)
     
@@ -115,6 +115,7 @@ for (ind in c(1)) {
   print(paste0("Model ", id.model))
   rejs <- colMeans(results[,1:8] < 0.05)
   rejs_all <- c(rejs, colMeans(results[,9:10]))
+  print(rejs_all)
   saveRDS(rejs_all, file = paste0(path.output, "/metric/model_", id.model, ".rds"))
   
   #### stop cluster - MacOS ####

@@ -6,9 +6,126 @@
 # 5. rho: correlation coefficient for AR(1) covariance structure
 
 switch (id.model,
-        # low dim
+        # unequal covariance
         "1" = { 
-          id.distr.X <- "4"; id.sigma <- "1"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"
+          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"
+        },
+        "2" = { 
+          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"
+        },
+        "3" = { 
+          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"
+        },
+        "4" = { 
+          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"
+        },
+        "5" = { 
+          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"
+        },
+        "6" = { 
+          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "2"
+        },
+        "7" = { 
+          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "2"
+        },
+        "8" = { 
+          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "2"
+        },
+        "9" = { 
+          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "2"
+        },
+        "10" = { 
+          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "2"
+        },
+        "11" = { 
+          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "3"
+        },
+        "12" = { 
+          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "3"
+        },
+        "13" = { 
+          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "3"
+        },
+        "14" = { 
+          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "3"
+        },
+        "15" = { 
+          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "3"
+        },
+        "16" = { 
+          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"
+        },
+        "17" = { 
+          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"
+        },
+        "18" = { 
+          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"
+        },
+        "19" = { 
+          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"
+        },
+        "20" = { 
+          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"
+        },
+        "21" = { 
+          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"
+        },
+        "22" = { 
+          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"
+        },
+        "23" = { 
+          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"
+        },
+        "24" = { 
+          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"
+        },
+        "25" = { 
+          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"
+        },
+        "26" = { 
+          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "2"
+        },
+        "27" = { 
+          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "2"
+        },
+        "28" = { 
+          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "2"
+        },
+        "29" = { 
+          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "2"
+        },
+        "30" = { 
+          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "2"
+        },
+        "31" = { 
+          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "3"
+        },
+        "32" = { 
+          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "3"
+        },
+        "33" = { 
+          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "3"
+        },
+        "34" = { 
+          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "3"
+        },
+        "35" = { 
+          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "3"
+        },
+        "36" = { 
+          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"
+        },
+        "37" = { 
+          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"
+        },
+        "38" = { 
+          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"
+        },
+        "39" = { 
+          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"
+        },
+        "40" = { 
+          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"
         }
 )
 
@@ -37,7 +154,7 @@ switch (id.sigma,
         # unequal covariance
         "2" = { # proportionally different covariance
           sigma1 = AR(rho, p)
-          sigma2 = AR(rho, p) * 1.5
+          sigma2 = AR(rho, p) * 2
           dsigma1 = t(chol(sigma1))
           dsigma2 = t(chol(sigma2))
         },
