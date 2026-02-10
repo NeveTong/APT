@@ -115,8 +115,8 @@ for (ind in c(41)) {
   saveRDS(results, file = paste0(path.output, "raw/model_", id.model, ".rds"))
   
   print(paste0("Model ", id.model))
-  rejs <- colMeans(results[,1:8] < 0.05)
-  rejs_all <- c(rejs, colMeans(results[,9:10]))
+  rejs <- colMeans(results[,1:8] < 0.05, na.rm = TRUE)
+  rejs_all <- c(rejs, colMeans(results[,9:10], na.rm = TRUE))
   print(rejs_all)
   saveRDS(rejs_all, file = paste0(path.output, "/metric/model_", id.model, ".rds"))
   
