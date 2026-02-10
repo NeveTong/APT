@@ -1,0 +1,131 @@
+rm(list = ls())
+
+#### read in simulation settings ####
+r.args <- commandArgs(trailingOnly=T)
+print(r.args)
+id.model <- r.args[1]
+
+for (ind in c(1)) {
+  # ind <- 1
+  id.model <- as.character(ind)
+  print(paste0("Start Simulating Model ", id.model))
+  
+  #### configuration ####
+  path.code <- paste0(getwd(), "/code/")
+  source(paste0(path.code, "config.R"))
+  
+  #### parallel computing setup - MacOS ####
+  library(doParallel)
+  library(parallel)
+  library(foreach)
+  closeAllConnections()
+  unregister_dopar()
+  n.cores <- parallel::detectCores()
+  retry({
+    my.cluster <- parallel::makeCluster(n.cores, type = "FORK", outfile="")
+    # my.cluster <- parallel::makeCluster(n.cores, type = "PSOCK", outfile="") # use PSOCK for MacOS: On macOS, calling CoreFoundation / Objective-C from forked child processes is unsafe and triggers crash.
+    doParallel::registerDoParallel(cl = my.cluster)
+  })
+  foreach::getDoParRegistered()
+  foreach::getDoParWorkers()
+  
+  # #### parallel computing setup - Slurm ####
+  # library(doMPI)
+  # library(foreach)
+  # cl <- startMPIcluster()
+  # registerDoMPI(cl)
+  # foreach::getDoParRegistered()
+  # foreach::getDoParWorkers()
+  
+  results <- foreach::foreach(i = 1:20, .combine = "rbind", .multicombine = TRUE, .packages = c("highmean", "Hotelling")) %dopar% {
+    
+    set.seed(i)
+    
+    data_all <- generate_data()
+    obj_genX1 <- data_all$obj_genX1
+    obj_genX2 <- data_all$obj_genX2
+    Y1 <- obj_genX1$X
+    Y2 <- obj_genX2$X
+    
+    #### Bai and Saranadasa (1996)
+    print(system.time({
+      # apval_BS = highmean::apval_Bai1996(Y1, Y2)$pval
+      epval_BS = highmean::epval_Bai1996(Y1, Y2, n.iter=200)$pval
+    }))
+    
+    ### Xu G, Lin L, Wei P, and Pan W (2016)
+    print(system.time({
+      # apval_XLWP = highmean::apval_aSPU(Y1, Y2)$pval
+      epval_XLWP = highmean::epval_aSPU(Y1, Y2, n.iter=200)$pval[8]
+    }))
+    
+    ### Cai, Liu, and Xia (2014)
+    print(system.time({
+      # apval_CLX = highmean::apval_Cai2014(Y1, Y2)$pval
+      epval_CLX = highmean::epval_Cai2014(Y1, Y2, n.iter=200)$pval
+    }))
+    
+    ### Chen and Qin (2010)
+    print(system.time({
+      # apval_CQ = highmean::apval_Chen2010(Y1, Y2)$pval
+      epval_CQ = highmean::epval_Chen2010(Y1, Y2, n.iter=200)$pval
+    }))
+    
+    ### Chen, Li, and Zhong (2014/2019)
+    print(system.time({
+      # apval_CLZ = highmean::apval_Chen2014(Y1, Y2)$pval
+      epval_CLZ = highmean::epval_Chen2014(Y1, Y2, n.iter=200)$pval
+    }))
+    
+    ### Srivastava and Du (2008)
+    print(system.time({
+      # apval_SD = highmean::apval_Sri2008(Y1, Y2)$pval
+      epval_SD = highmean::epval_Sri2008(Y1, Y2, n.iter=200)$pval
+    }))
+    
+    #### Lopes, Jacob, and Wainwright (2011)
+    n = n1 + n2 - 2
+    P = matrix(rnorm(p * floor(n/2)), p, floor(n/2))
+    Z1 = Y1 %*% P
+    Z2 = Y2 %*% P
+    test = Hotelling::hotelling.test(x=Z1, y=Z2)
+    aRPT_pval = test$pval
+    
+    #### Li and Li (2021)
+    print(system.time({
+      LL_pval = epval_UprojTwoSample(Y1, Y2, B1 = 500, perm.iter = 200)
+    }))
+    # LL_pval=0
+    
+    #### PT and APT
+    print(system.time({
+      kap = 1/2
+      PT_APT = sim(p, n1, n2, kap, sigma, dsigma, mu1, mu2, obj_genX1, obj_genX2)
+      PT_rej = PT_APT$rej_norwt[2]
+      APT_rej = PT_APT$rej_rwt[2]
+    }))
+    # PT_rej=APT_rej=0
+    
+    return(c(epval_BS, epval_CQ, epval_SD, epval_CLZ, epval_CLX, epval_XLWP, aRPT_pval, LL_pval, PT_rej, APT_rej))
+  }
+
+  colnames(results) <- c("BS", "CQ", "SD", "CLZ", "CLX", "XLWP", "RPT", "LL", "PT", "APT")
+  saveRDS(results, file = paste0(path.output, "raw/model_", id.model, ".rds"))
+  
+  print(paste0("Model ", id.model))
+  rejs <- colMeans(results[,1:8] < 0.05)
+  rejs_all <- c(rejs, colMeans(results[,9:10]))
+  saveRDS(rejs_all, file = paste0(path.output, "/metric/model_", id.model, ".rds"))
+  
+  #### stop cluster - MacOS ####
+  closeAllConnections()
+  closeAllConnections()
+  library(beepr)
+  beep(2)
+  
+  # #### stop cluster - Slurm ####
+  # closeCluster(cl)
+  # mpi.quit()
+}
+
+beep(2)
