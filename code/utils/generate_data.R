@@ -1,6 +1,7 @@
 generate_data <- function() {
   switch (id.sigma,
-          "1" = { # equal covariance
+          # equal covariance
+          "1" = { 
             switch(id.distr.X,
                    "1" = { # normal
                      obj_genX1 <- gen_vecX(n1, p, mu1, dsigma, type = "Normal")
@@ -23,11 +24,12 @@ generate_data <- function() {
                      obj_genX2 <- gen_vecX(n2, p, mu2, dsigma, type = "Contaminated Normal3")
                    })
           },
-          "2" = { # unequal covariance
+          # unequal covariance 
+          "2" = { # proportionally different covariance
             switch(id.distr.X,
                    "1" = { # normal
-                     obj_genX1 <- matrix(rnorm(n1*p), n1, p) %*% t(dsigma1) + t(matrix(rep(mu1,n1),p,n1))
-                     obj_genX2 <- matrix(rnorm(n2*p), n2, p) %*% t(dsigma2) + t(matrix(rep(mu2,n2),p,n2))
+                     obj_genX1 <- gen_vecX(n1, p, mu1, dsigma1, type = "Normal")
+                     obj_genX2 <- gen_vecX(n2, p, mu2, dsigma2, type = "Normal")
                    },
                    "2" = { # t6-distribution
                      obj_genX1 <- gen_vecX(n1, p, mu1, dsigma1, type = "T", df=6)
