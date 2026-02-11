@@ -4,8 +4,8 @@
 # t-test
 # Depend on the SPT function in "SPT_msda_ttest_val.R"
 
-MPT_ttest_msda_no_rwt_bic = function(vec_X1, vec_X2, N1, N2, mu1, mu2, dsigma, sigma, 
-                                 lambda.list = NULL, 
+MPT_ttest_msda_no_rwt_bic = function(vec_X1, vec_X2, N1, N2, mu1, mu2, 
+                                     sigma1, sigma2, lambda.list = NULL, 
                                  gammas1_true = NULL, gammas2_true = NULL,
                                  alpha=0.05, M=40){
   # M: the number of splittings
@@ -29,7 +29,7 @@ MPT_ttest_msda_no_rwt_bic = function(vec_X1, vec_X2, N1, N2, mu1, mu2, dsigma, s
     perms1[mm,] = sample(n1, replace = FALSE)
     perms2[mm,] = sample(n2, replace = FALSE)
     tmp = SPT_ttest_msda_no_rwt_bic(vec_X1[perms1[mm,],], vec_X2[perms2[mm,],], N1, N2, 
-                                mu1, mu2, dsigma, sigma, lambda.list)
+                                mu1, mu2, sigma1, sigma2, lambda.list)
     pvalues[mm] = tmp$p_value
     Tns[mm] = tmp$T_n
     zs[mm] = qnorm(pvalues[mm])

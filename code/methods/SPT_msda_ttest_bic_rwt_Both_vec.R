@@ -3,8 +3,8 @@
 # Generate an independent validation set to tune the projection direction estimate
 # t-test
 
-SPT_ttest_msda_rwt_bic = function(X1, X2, N1, N2, mu1, mu2, dsigma, sigma, lambda.list = NULL, 
-                                  gammas1_true=NULL, gammas2_true=NULL){
+SPT_ttest_msda_rwt_bic = function(X1, X2, N1, N2, mu1, mu2, sigma1, sigma2, 
+                                  lambda.list = NULL, gammas1_true=NULL, gammas2_true=NULL){
   
   # Conduct t-test on projected sample
   n1 = nrow(X1); n2 = nrow(X2)
@@ -59,7 +59,7 @@ SPT_ttest_msda_rwt_bic = function(X1, X2, N1, N2, mu1, mu2, dsigma, sigma, lambd
   z_bar_diff = z1_bar - z2_bar
   
   # True prediction direction
-  w_true = solve(sigma) %*% matrix(mu1 - mu2, ncol = 1)
+  w_true = solve(sigma1) %*% matrix(mu1 - mu2, ncol = 1)
   
   if (is.null(lambda.list)){
     lambda.list = exp(seq(log(5), log(0.01), length=100))

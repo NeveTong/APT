@@ -270,8 +270,8 @@ rho <- switch (id.rho,
 switch (id.sigma,
         # equal covariance
         "1" = { 
-          sigma = AR(rho, p)
-          dsigma = t(chol(sigma))
+          sigma1 <- sigma2 <- AR(rho, p)
+          dsigma1 <- dsigma2 <- t(chol(sigma))
         },
         # unequal covariance
         "2" = { # proportionally different covariance
