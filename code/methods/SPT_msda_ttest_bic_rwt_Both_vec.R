@@ -101,16 +101,33 @@ SPT_ttest_msda_rwt_bic = function(X1, X2, N1, N2, mu1, mu2, sigma1, sigma2,
   # Projection and test
   y1 = U12 %*% w_hat
   y2 = V12 %*% w_hat
-  sy_pooled = sqrt((var(y1) * (n12-1) + var(y2) *(n22-1)) / (n12+n22-2))
-  if (sy_pooled > 0){
-    T_n = (mean(y1) - mean(y2)) / (sy_pooled * sqrt(1/n12 + 1/n22))
-    # p_value = 2 * (1 - pnorm(abs(T_n), lower.tail  =  TRUE))
-    p_value = 2 * (1 - pt(abs(T_n), df=n12+n22-2, lower.tail  =  TRUE))
-  }else{
-    T_n = (mean(y1) - mean(y2)) / (sy_pooled * sqrt(1/n12 + 1/n22))
-    # p_value = 2 * (1 - pnorm(abs(T_n), lower.tail  =  TRUE))
-    # p_value = 1
-    p_value = 0.5
+  if (identical(sigma1, sigma2)){
+    sy_pooled = sqrt((var(y1) * (n12-1) + var(y2) *(n22-1)) / (n12+n22-2))
+    if (sy_pooled > 0){
+      T_n = (mean(y1) - mean(y2)) / (sy_pooled * sqrt(1/n12 + 1/n22))
+      # p_value = 2 * (1 - pnorm(abs(T_n), lower.tail  =  TRUE))
+      p_value = 2 * (1 - pt(abs(T_n), df=n12+n22-2, lower.tail  =  TRUE))
+    }else{
+      T_n = (mean(y1) - mean(y2)) / (sy_pooled * sqrt(1/n12 + 1/n22))
+      # p_value = 2 * (1 - pnorm(abs(T_n), lower.tail  =  TRUE))
+      # p_value = 1
+      p_value = 0.5
+    }
+  } else{ # Welch's t-test
+    var_y1 = var(y1)
+    var_y2 = var(y2)
+    denominator = sqrt(var_y1/n12 + var_y2/n22)
+    if (denominator == 0){
+      T_n = Inf
+      p_value = 0.5
+    }else{
+      T_n = (mean(y1) - mean(y2)) / denominator
+      df_num = (var_y1/n12 + var_y2/n22)^2
+      df_denom = (var_y1^2 / (n12^2 * (n12-1))) + (var_y2^2 / (n22^2 * (n22-1)))
+      df = df_num / df_denom
+      # p_value = 2 * (1 - pnorm(abs(T_n), lower.tail  =  TRUE))
+      p_value = 2 * (1 - pt(abs(T_n), df=df, lower.tail  =  TRUE))
+    }
   }
 
   #########################################################
