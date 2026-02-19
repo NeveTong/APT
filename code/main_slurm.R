@@ -35,7 +35,7 @@ foreach::getDoParRegistered()
 foreach::getDoParWorkers()
 
 print(system.time({
-  results <- foreach::foreach(i = 1:20, .combine = "rbind", .packages = c("highmean", "Hotelling")) %dopar% {
+  results <- foreach::foreach(i = 1:n_rep, .combine = "rbind", .packages = c("highmean", "Hotelling")) %dopar% {
     
     set.seed(i)
     

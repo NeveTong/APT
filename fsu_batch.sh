@@ -1,7 +1,7 @@
 #!/bin/bash
 
-a=1
-while [ $a -le 1 ]
+a=41
+while [ $a -le 42 ]
 do 
 
     sbatch << EOJ
@@ -21,7 +21,7 @@ cd $PWD
 module purge
 module load gnu/13.2.0 openmpi/4.1.6 R/4.4.0
 
-mpirun -n 11 Rscript code/main.R ${a}
+mpirun -n 11 Rscript code/main_slurm.R ${a}
 
 EOJ
 
