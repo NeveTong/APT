@@ -276,7 +276,7 @@ switch (id.sigma,
         # unequal covariance
         "2" = { # proportionally different covariance
           sigma1 = AR(rho, p)
-          sigma2 = AR(rho, p) * 1.2
+          sigma2 = AR(rho, p) * 1.5
           dsigma1 = t(chol(sigma1))
           dsigma2 = t(chol(sigma2))
         },
