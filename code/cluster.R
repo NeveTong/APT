@@ -1,6 +1,6 @@
 usethis::use_git_config(user.name = "NeveTong", user.email = "yiyeqqa@163.com")
 credentials::set_github_pat("YourPAT")
-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
+thisisnot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
 
 
 ## how to submit job
