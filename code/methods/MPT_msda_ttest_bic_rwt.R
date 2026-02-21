@@ -25,7 +25,7 @@ MPT_ttest_msda_rwt_bic = function(vec_X1, vec_X2, N1, N2, mu1, mu2, sigma1, sigm
   
   for (mm in 1:M){
     # cat("The ", mm, "th split\n")
-    set.seed(mm)
+    # set.seed(mm)
     perms1[mm,] = sample(n1, replace = FALSE)
     perms2[mm,] = sample(n2, replace = FALSE)
     tmp = SPT_ttest_msda_rwt_bic(vec_X1[perms1[mm,],], vec_X2[perms2[mm,],], N1, N2, 

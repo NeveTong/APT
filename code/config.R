@@ -18,7 +18,7 @@ file.sources = list.files(c(path.utils), pattern = "*.R$", full.names = TRUE, ig
 sapply(file.sources, source, .GlobalEnv)
 
 packages.cran <- c("abind", "beepr", "Hotelling", "parallel", "penalizedSVM",
-                   "msda", "catch", "tensr", "rTensor")
+                   "msda", "catch", "tensr", "rTensor", "doRNG")
 packages.github.mine <- c()
 packages.github.cran <- c()
 load_silently(packages.cran, packages.github.mine, packages.github.cran)
