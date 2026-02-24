@@ -339,9 +339,36 @@ gen_gammas = function(n, type=NULL, df=NULL){
   return(gammas)
 }
 
+# Generate skew-normal W
+generate_skew_W <- function(n, p, dsigma, alpha = 1) {
+  # Generate Z1 ~ N(0, Sigma)
+  Z1 <- matrix(rnorm(n * p), n, p) %*% t(dsigma)
+  # Generate Z2 ~ N(0, I)
+  Z2 <- matrix(rnorm(n * p), n, p)
+  # Skew-normal construction
+  W_raw <- Z1 + alpha * abs(Z2)
+  
+  # ---- Centering ----
+  # E|Z| = sqrt(2/pi)
+  mean_shift <- alpha * sqrt(2/pi)
+  W_centered <- sweep(W_raw, 2, mean_shift, "-")
+  
+  # ---- Rescale variance ----
+  # Var(|Z|) = 1 - 2/pi
+  var_increase <- alpha^2 * (1 - 2/pi)
+  
+  # Marginal variance:
+  # Var(Z1_j) = 1 (since AR diag = 1)
+  marginal_var <- 1 + var_increase
+  
+  W <- W_centered / sqrt(marginal_var)
+  
+  return(W)
+}
+
 
 # Generate X
-gen_vecX = function(n, p, mu, dsigma, type=NULL, df=NULL){
+gen_vecX = function(n, p, mu, dsigma, type=NULL, df=NULL, W_skew = F){
   # ------------------------------------------------------------
   # Input:
   #       - n: sample size; a scalar
@@ -361,8 +388,12 @@ gen_vecX = function(n, p, mu, dsigma, type=NULL, df=NULL){
   # Generate gammas
   gammas = gen_gammas(n, type=type, df=df)
   # Generate W's
+  if (W_skew){
+    W = generate_skew_W(n, p, dsigma)
+  }else{
   W = matrix(rnorm(n*p), n, p)
   W = W %*% t(dsigma)
+  }
   # Construct X
   X = matrix(NA, n, p)
   for (ii in 1:n){
