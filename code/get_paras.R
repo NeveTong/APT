@@ -161,10 +161,16 @@ switch (id.model,
         },
         # skew normal W
         "51" = { 
-          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "1"; id.rho <- "3"; id.W <- "2"
+          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "2"
         },
         "52" = { 
-          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "3"; id.W <- "2"
+          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "2"
+        },
+        "53" = { 
+          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "2"
+        },
+        "54" = { 
+          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "2"
         })
 
 n1 = 40
