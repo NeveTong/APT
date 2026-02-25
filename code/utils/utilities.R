@@ -340,7 +340,7 @@ gen_gammas = function(n, type=NULL, df=NULL){
 }
 
 # Generate skew-normal W
-generate_skew_W <- function(n, p, dsigma, alpha = 1) {
+generate_skew_W <- function(n, p, dsigma, alpha = 3) {
   # Generate Z1 ~ N(0, Sigma)
   Z1 <- matrix(rnorm(n * p), n, p) %*% t(dsigma)
   # Generate Z2 ~ N(0, I)
