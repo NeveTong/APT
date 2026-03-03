@@ -5,7 +5,7 @@ r.args <- commandArgs(trailingOnly=T)
 print(r.args)
 id.model <- r.args[1]
 
-for (ind in c(21)) {
+for (ind in c(41:50)) {
   # ind <- 1
   id.model <- as.character(ind)
   print(paste0("Start Simulating Model ", id.model))
@@ -124,7 +124,7 @@ for (ind in c(21)) {
       APT_rej <- NA
       tryCatch({
         kap = 1/2
-        PT_APT = sim(p, n1, n2, kap, sigma1, sigma2, mu1, mu2, obj_genX1, obj_genX2)
+        PT_APT = sim(p, n1, n2, kap, sigma1, sigma2, mu1, mu2, obj_genX1, obj_genX2, population_center = T)
         PT_rej = PT_APT$rej_norwt[2]
         APT_rej = PT_APT$rej_rwt[2]
       }, error = function(e) {

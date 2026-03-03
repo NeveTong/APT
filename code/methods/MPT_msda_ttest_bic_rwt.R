@@ -7,7 +7,7 @@
 MPT_ttest_msda_rwt_bic = function(vec_X1, vec_X2, N1, N2, mu1, mu2, sigma1, sigma2, 
                                    lambda.list = NULL, 
                                    gammas1_true = NULL, gammas2_true = NULL,
-                                   alpha=0.05, M=40){
+                                   alpha=0.05, M=40, population_center = F){
   # M: the number of splittings
   
   n1 = nrow(vec_X1); n2 = nrow(vec_X2)
@@ -29,9 +29,10 @@ MPT_ttest_msda_rwt_bic = function(vec_X1, vec_X2, N1, N2, mu1, mu2, sigma1, sigm
     perms1[mm,] = sample(n1, replace = FALSE)
     perms2[mm,] = sample(n2, replace = FALSE)
     tmp = SPT_ttest_msda_rwt_bic(vec_X1[perms1[mm,],], vec_X2[perms2[mm,],], N1, N2, 
-                                  mu1, mu2, sigma1, sigma2, lambda.list, 
-                                  gammas1_true = gammas1_true[perms1[mm,]], 
-                                  gammas2_true = gammas2_true[perms2[mm,]])
+                                 mu1, mu2, sigma1, sigma2, lambda.list, 
+                                 gammas1_true = gammas1_true[perms1[mm,]], 
+                                 gammas2_true = gammas2_true[perms2[mm,]], 
+                                 population_center = population_center)
     pvalues[mm] = tmp$p_value
     Tns[mm] = tmp$T_n
     zs[mm] = qnorm(pvalues[mm])

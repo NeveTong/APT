@@ -4,7 +4,8 @@
 # t-test
 
 SPT_ttest_msda_rwt_bic = function(X1, X2, N1, N2, mu1, mu2, sigma1, sigma2, 
-                                  lambda.list = NULL, gammas1_true=NULL, gammas2_true=NULL){
+                                  lambda.list = NULL, gammas1_true=NULL, 
+                                  gammas2_true=NULL, population_center = F){
   
   # Conduct t-test on projected sample
   n1 = nrow(X1); n2 = nrow(X2)
@@ -27,9 +28,14 @@ SPT_ttest_msda_rwt_bic = function(X1, X2, N1, N2, mu1, mu2, sigma1, sigma2,
     obj12 = est_rose(X12, gammas.truth = gammas1_true[(n11+1):n1])
     obj22 = est_rose(X22, gammas.truth = gammas2_true[(n21+1):n2])
     # Z12_ora = obj12$Xrwt_trueGamma; Z22_ora = obj22$Xrwt_trueGamma
-    mu_ora_overall = (obj12$mu.oracle + obj22$mu.oracle) / 2
-    X12_ora_centered = X12 - t(matrix(rep(mu_ora_overall, n12), p, n12))
-    X22_ora_centered = X22 - t(matrix(rep(mu_ora_overall, n22), p, n22))
+    if (population_center){
+      X12_ora_centered = X12
+      X22_ora_centered = X22
+    }else{
+      mu_ora_overall = (obj12$mu.oracle + obj22$mu.oracle) / 2
+      X12_ora_centered = X12 - t(matrix(rep(mu_ora_overall, n12), p, n12))
+      X22_ora_centered = X22 - t(matrix(rep(mu_ora_overall, n22), p, n22))
+    }
     
     U12_ora = diag(1/gammas1_true[(n11+1):n1]) %*% X12_ora_centered
     V12_ora = diag(1/gammas2_true[(n21+1):n2]) %*% X22_ora_centered
@@ -38,9 +44,14 @@ SPT_ttest_msda_rwt_bic = function(X1, X2, N1, N2, mu1, mu2, sigma1, sigma2,
     obj11 = est_rose(X11); obj21 = est_rose(X21)
     obj12 = est_rose(X12); obj22 = est_rose(X22)
   }
-  mu_est_overall = (obj12$mu.est + obj22$mu.est) / 2
-  X12_centered = X12 - t(matrix(rep(mu_est_overall, n12), p, n12))
-  X22_centered = X22 - t(matrix(rep(mu_est_overall, n22), p, n22))
+  if (population_center){
+    X12_centered = X12
+    X22_centered = X22
+  }else{
+    mu_est_overall = (obj12$mu.est + obj22$mu.est) / 2
+    X12_centered = X12 - t(matrix(rep(mu_est_overall, n12), p, n12))
+    X22_centered = X22 - t(matrix(rep(mu_est_overall, n22), p, n22))
+  }
   obj12_tilde = est_rose(X12_centered); obj22_tilde = est_rose(X22_centered)
   gammas1_tilde = obj12_tilde$gammas.est; gammas2_tilde = obj22_tilde$gammas.est
   U12 = diag(1 / gammas1_tilde) %*% X12_centered

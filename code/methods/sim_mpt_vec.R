@@ -1,7 +1,7 @@
 # Update: 05/24/2024
 # t-test
 
-sim = function(p, n1, n2, kap, sigma1, sigma2, mu1, mu2, obj_genX1, obj_genX2){
+sim = function(p, n1, n2, kap, sigma1, sigma2, mu1, mu2, obj_genX1, obj_genX2, population_center = F){
 
   n11 = n1 * kap; n12 = n1 - n11
   n21 = n2 * kap; n22 = n2 - n21
@@ -17,6 +17,12 @@ sim = function(p, n1, n2, kap, sigma1, sigma2, mu1, mu2, obj_genX1, obj_genX2){
   X2 = obj_genX2$X
   gammas2_true = obj_genX2$gammas
   W2 = obj_genX2$W
+  
+  if (population_center) {
+    m_pop = (mu1 + mu2) / 2
+    X1 = X1 - matrix(rep(m_pop, each = nrow(X1)), nrow = nrow(X1))
+    X2 = X2 - matrix(rep(m_pop, each = nrow(X2)), nrow = nrow(X2))
+  }
 
   # ===============================================
   #                   MPT
@@ -31,7 +37,9 @@ sim = function(p, n1, n2, kap, sigma1, sigma2, mu1, mu2, obj_genX1, obj_genX2){
   dists_norwt_bic = fit_mpt_msda_ttest_no_rwt_bic$dists
   
   fit_mpt_msda_ttest_rwt_bic = MPT_ttest_msda_rwt_bic(X1, X2, N1, N2, mu1, mu2, sigma1, sigma2, lambda.list,
-                                                      gammas1_true = obj_genX1$gammas, gammas2_true = obj_genX2$gammas)
+                                                      gammas1_true = obj_genX1$gammas, 
+                                                      gammas2_true = obj_genX2$gammas, 
+                                                      population_center = population_center)
   rej_rwt_bic = fit_mpt_msda_ttest_rwt_bic$rejs
   rej_rwt_bic_ora = fit_mpt_msda_ttest_rwt_bic$rejs_ora
   lamsel_rwt_bic = fit_mpt_msda_ttest_rwt_bic$lamsel
