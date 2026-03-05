@@ -171,6 +171,38 @@ switch (id.model,
         },
         "54" = { 
           id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "2"
+        },
+        # check reproducibility for original paper results
+        "55" = { 
+          id.distr.X <- "1"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+        },
+        "56" = { 
+          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+        },
+        "57" = { 
+          id.distr.X <- "3"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+        },
+        "58" = { 
+          id.distr.X <- "4"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+        },
+        "59" = { 
+          id.distr.X <- "5"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+        },
+        # check reproducibility for low dim results
+        "60" = { 
+          id.distr.X <- "1"; id.sigma <- "1"; id.p <- "2"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+        },
+        "61" = { 
+          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "2"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+        },
+        "62" = { 
+          id.distr.X <- "3"; id.sigma <- "1"; id.p <- "2"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+        },
+        "63" = { 
+          id.distr.X <- "4"; id.sigma <- "1"; id.p <- "2"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+        },
+        "64" = { 
+          id.distr.X <- "5"; id.sigma <- "1"; id.p <- "2"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
         })
 
 n1 = 40
