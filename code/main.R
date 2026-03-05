@@ -5,7 +5,7 @@ r.args <- commandArgs(trailingOnly=T)
 print(r.args)
 id.model <- r.args[1]
 
-for (ind in c(55:59)) {
+for (ind in c(60:64)) {
   # ind <- 1
   id.model <- as.character(ind)
   print(paste0("Start Simulating Model ", id.model))
@@ -18,7 +18,6 @@ for (ind in c(55:59)) {
   library(doParallel)
   library(parallel)
   library(foreach)
-  library(doRNG)
   closeAllConnections()
   unregister_dopar()
   n.cores <- parallel::detectCores()
@@ -29,7 +28,6 @@ for (ind in c(55:59)) {
   })
   foreach::getDoParRegistered()
   foreach::getDoParWorkers()
-  registerDoRNG(ind)
   
   # #### parallel computing setup - Slurm ####
   # library(doMPI)
@@ -40,9 +38,9 @@ for (ind in c(55:59)) {
   # foreach::getDoParWorkers()
   
   print(system.time({
-    results <- foreach::foreach(i = 1:n_rep, .combine = "rbind", .packages = c("highmean", "Hotelling")) %dorng% {
+    results <- foreach::foreach(i = 1:n_rep, .combine = "rbind", .packages = c("highmean", "Hotelling")) %dopar% {
       
-      # set.seed(i)
+      set.seed(i)
       
       data_all <- generate_data()
       obj_genX1 <- data_all$obj_genX1

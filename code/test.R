@@ -64,3 +64,30 @@ W_normal <- matrix(rnorm(n), n, 1)
 par(mfrow=c(1,2))
 hist(W_normal, main="Normal", col="gray")
 hist(W[,1], main=paste("Skew alpha=",alpha), col="lightblue")
+
+
+## test random seed: below works, no need to use dorng
+rm(list = ls())
+library(doParallel)
+library(parallel)
+library(foreach)
+closeAllConnections()
+unregister_dopar()
+n.cores <- parallel::detectCores()
+retry({
+  my.cluster <- parallel::makeCluster(n.cores, type = "FORK", outfile="")
+  # my.cluster <- parallel::makeCluster(n.cores, type = "PSOCK", outfile="") # use PSOCK for MacOS: On macOS, calling CoreFoundation / Objective-C from forked child processes is unsafe and triggers crash.
+  doParallel::registerDoParallel(cl = my.cluster)
+})
+foreach::getDoParRegistered()
+foreach::getDoParWorkers()
+
+results <- foreach::foreach(i = 1:10, .combine = "rbind", .packages = c("highmean", "Hotelling")) %dopar% {
+  
+  set.seed(i)
+  print(paste0("Iteration ", i, " with seed ", i))
+  print(paste0("Random number: ", runif(1)))
+  
+  c(iteration = i, random_number = runif(1))
+}
+results
