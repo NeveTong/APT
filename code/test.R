@@ -91,3 +91,52 @@ results <- foreach::foreach(i = 1:10, .combine = "rbind", .packages = c("highmea
   c(iteration = i, random_number = runif(1))
 }
 results
+
+### test random seed: data generation is reproducible with the same seed in each iteration
+rm(list = ls())
+
+#### configuration ####
+id.model <- 56
+path.code <- paste0(getwd(), "/code/")
+source(paste0(path.code, "config.R"))
+
+library(doParallel)
+library(parallel)
+library(foreach)
+
+closeAllConnections()
+unregister_dopar()
+
+n.cores <- parallel::detectCores()
+
+my.cluster <- parallel::makeCluster(n.cores, type = "FORK", outfile="")
+doParallel::registerDoParallel(my.cluster)
+
+n_rep <- 100   # small test
+
+#### function to generate data in parallel ####
+run_sim <- function(){
+  
+  data_list <- foreach(i = 1:n_rep, .packages = c("highmean","Hotelling")) %dopar% {
+    
+    set.seed(i)
+    
+    data_all <- generate_data()
+    
+    return(data_all)
+  }
+  
+  return(data_list)
+}
+
+#### run twice ####
+data_run1 <- run_sim()
+data_run2 <- run_sim()
+
+#### check if identical ####
+identical_results <- mapply(identical, data_run1, data_run2)
+
+print(identical_results)
+print(all(identical_results))
+
+stopCluster(my.cluster)
