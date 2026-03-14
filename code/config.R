@@ -18,8 +18,8 @@ file.sources = list.files(c(path.utils), pattern = "*.R$", full.names = TRUE, ig
 sapply(file.sources, source, .GlobalEnv)
 
 packages.cran <- c("abind", "beepr", "Hotelling", "parallel", "penalizedSVM",
-                   "msda", "catch", "tensr", "rTensor", "doRNG")
-packages.github.mine <- c()
+                   "catch", "tensr", "rTensor", "devtools", "doParallel", "foreach", "highmean")
+packages.github.mine <- c("msda")
 packages.github.cran <- c()
 load_silently(packages.cran, packages.github.mine, packages.github.cran)
 RNGkind("L'Ecuyer-CMRG")

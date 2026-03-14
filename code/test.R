@@ -65,8 +65,8 @@ par(mfrow=c(1,2))
 hist(W_normal, main="Normal", col="gray")
 hist(W[,1], main=paste("Skew alpha=",alpha), col="lightblue")
 
-
-## test random seed: below works, no need to use dorng
+##############
+### test random seed: below works, no need to use dorng
 rm(list = ls())
 library(doParallel)
 library(parallel)
@@ -140,3 +140,45 @@ print(identical_results)
 print(all(identical_results))
 
 stopCluster(my.cluster)
+
+################
+### check if model_57_r1 and model_57_r2 has the same msda fit results
+r1 <- readRDS(paste0(getwd(),"/output/raw/model_57_r1/iter_2.rds"))
+r2 <- readRDS(paste0(getwd(),"/output/raw/model_57_r2/iter_2.rds"))
+fit1 <- r1$fit.msda
+fit2 <- r2$fit.msda
+identical(fit1, fit2)
+fit1.1 <- fit1[[1]]
+fit2.1 <- fit2[[1]]
+identical(fit1.1, fit2.1)
+identical(fit1.1$lambda, fit2.1$lambda) # different number of successful lambda
+fit1.1$lambda
+fit2.1$lambda
+len.lambda <- min(length(fit1.1$lambda), length(fit2.1$lambda))
+len.lambda
+
+### different number of successful lam is due to BLAS
+Sys.setenv(OMP_NUM_THREADS = 1)
+Sys.setenv(OPENBLAS_NUM_THREADS = 1)
+Sys.setenv(MKL_NUM_THREADS = 1)
+
+### however for the same lambda, the theta can be different, and the non-zero pattern can be the same or different
+all.equal(fit1.1$theta[[1]], fit2.1$theta[[1]])
+all.equal(fit1.1$theta[[10]], fit2.1$theta[[10]])
+all.equal(fit1.1$theta[[21]], fit2.1$theta[[21]])
+all.equal(fit1.1$theta[[37]], fit2.1$theta[[37]])
+ind <- 10
+fit1.1$theta[[ind]][which(fit1.1$theta[[ind]]!=0)]
+# compare above for 1:len.lambda
+sapply(1:len.lambda, FUN = function(i) all.equal(fit1.1$theta[[i]], fit2.1$theta[[i]]))
+# compare non-zero pattern
+sapply(1:len.lambda, FUN = function(i) identical(which(fit1.1$theta[[i]]!=0), which(fit2.1$theta[[i]]!=0)))
+# compare difference in objective value
+sapply(1:len.lambda, FUN = function(i) fit1.1$obj[[i]] - fit2.1$obj[[i]])
+# compare best lambda
+which(r1$lamsel == r2$lamsel)
+# index of lambda selected
+M <- 40
+sapply(1:M, FUN = function(i) which(fit1[[i]]$lambda == r1$lamsel[i]))
+# print out npasses
+sapply(1:len.lambda, FUN = function(i) c(npasses1 = fit1[[i]]$npasses, npasses2 = fit2[[i]]$npasses))

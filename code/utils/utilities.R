@@ -64,8 +64,8 @@ formatoutput <- function(fit, maxit, pmax, nvars, vnames, nk) {
                                                                , drop = FALSE]
       df[l] <- sum(rowSums(abs(theta[[l]])) != 0)
       theta[[l]] <- new("dgCMatrix", Dim = dd, Dimnames = list(vnames, resnames), 
-                        x = as.vector(theta[[l]][oja, ]), p = as.integer(itheta - 
-                                                                                                                             1), i = as.integer(ja - 1))
+                        x = as.vector(theta[[l]][oja, ]), 
+                        p = as.integer(itheta - 1), i = as.integer(ja - 1))
     }
   } else {
     theta <- list()
