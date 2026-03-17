@@ -9,200 +9,199 @@ switch (id.model,
         #### unequal covariance
         # proportionally different covariance
         "1" = { 
-          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "2" = { 
-          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "3" = { 
-          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "4" = { 
-          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "5" = { 
-          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "6" = { 
-          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "2"; id.W <- "1"
+          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "2"; id.W <- "1"; population_center <- F
         },
         "7" = { 
-          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "2"; id.W <- "1"
+          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "2"; id.W <- "1"; population_center <- F
         },
         "8" = { 
-          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "2"; id.W <- "1"
+          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "2"; id.W <- "1"; population_center <- F
         },
         "9" = { 
-          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "2"; id.W <- "1"
+          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "2"; id.W <- "1"; population_center <- F
         },
         "10" = { 
-          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "2"; id.W <- "1"
+          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "2"; id.W <- "1"; population_center <- F
         },
         "11" = { 
-          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "3"; id.W <- "1"
+          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "3"; id.W <- "1"; population_center <- F
         },
         "12" = { 
-          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "3"; id.W <- "1"
+          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "3"; id.W <- "1"; population_center <- F
         },
         "13" = { 
-          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "3"; id.W <- "1"
+          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "3"; id.W <- "1"; population_center <- F
         },
         "14" = { 
-          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "3"; id.W <- "1"
+          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "3"; id.W <- "1"; population_center <- F
         },
         "15" = { 
-          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "3"; id.W <- "1"
+          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "3"; id.W <- "1"; population_center <- F
         },
         "16" = { 
-          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "1"; population_center <- F
         },
         "17" = { 
-          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "1"; population_center <- F
         },
         "18" = { 
-          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "1"; population_center <- F
         },
         "19" = { 
-          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "1"; population_center <- F
         },
         "20" = { 
-          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "1"; population_center <- F
         },
         "21" = { 
-          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "22" = { 
-          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "23" = { 
-          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "24" = { 
-          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "25" = { 
-          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "26" = { 
-          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "2"; id.W <- "1"
+          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "2"; id.W <- "1"; population_center <- F
         },
         "27" = { 
-          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "2"; id.W <- "1"
+          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "2"; id.W <- "1"; population_center <- F
         },
         "28" = { 
-          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "2"; id.W <- "1"
+          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "2"; id.W <- "1"; population_center <- F
         },
         "29" = { 
-          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "2"; id.W <- "1"
+          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "2"; id.W <- "1"; population_center <- F
         },
         "30" = { 
-          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "2"; id.W <- "1"
+          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "2"; id.W <- "1"; population_center <- F
         },
         "31" = { 
-          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "3"; id.W <- "1"
+          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "3"; id.W <- "1"; population_center <- F
         },
         "32" = { 
-          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "3"; id.W <- "1"
+          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "3"; id.W <- "1"; population_center <- F
         },
         "33" = { 
-          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "3"; id.W <- "1"
+          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "3"; id.W <- "1"; population_center <- F
         },
         "34" = { 
-          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "3"; id.W <- "1"
+          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "3"; id.W <- "1"; population_center <- F
         },
         "35" = { 
-          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "3"; id.W <- "1"
+          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "3"; id.W <- "1"; population_center <- F
         },
         "36" = { 
-          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "1"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- F
         },
         "37" = { 
-          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "2"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- F
         },
         "38" = { 
-          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "3"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- F
         },
         "39" = { 
-          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "4"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- F
         },
         "40" = { 
-          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "5"; id.sigma <- "2"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- F
         },
         # not proportionally different covariance
         "41" = { 
-          id.distr.X <- "1"; id.sigma <- "3"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "1"; id.sigma <- "3"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "42" = { 
-          id.distr.X <- "2"; id.sigma <- "3"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "2"; id.sigma <- "3"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "43" = { 
-          id.distr.X <- "3"; id.sigma <- "3"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "3"; id.sigma <- "3"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "44" = { 
-          id.distr.X <- "4"; id.sigma <- "3"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "4"; id.sigma <- "3"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "45" = { 
-          id.distr.X <- "5"; id.sigma <- "3"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "5"; id.sigma <- "3"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "46" = { 
-          id.distr.X <- "1"; id.sigma <- "3"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "1"; id.sigma <- "3"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "47" = { 
-          id.distr.X <- "2"; id.sigma <- "3"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "2"; id.sigma <- "3"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "48" = { 
-          id.distr.X <- "3"; id.sigma <- "3"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "3"; id.sigma <- "3"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "49" = { 
-          id.distr.X <- "4"; id.sigma <- "3"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "4"; id.sigma <- "3"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         "50" = { 
-          id.distr.X <- "5"; id.sigma <- "3"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"
+          id.distr.X <- "5"; id.sigma <- "3"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
         # skew normal W
         "51" = { 
-          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "2"
+          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "2"; population_center <- F
         },
         "52" = { 
-          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "2"
+          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "2"; population_center <- F
         },
         "53" = { 
-          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "2"
+          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "1"; id.W <- "2"; population_center <- F
         },
         "54" = { 
-          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "2"
+          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "2"; population_center <- F
         },
-        # check reproducibility for original paper results
+        # centering the whole dataset with population mean
         "55" = { 
-          id.distr.X <- "1"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "1"; id.sigma <- "1"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "1"; population_center <- T
         },
         "56" = { 
-          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "1"; population_center <- T
         },
         "57" = { 
-          id.distr.X <- "3"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "3"; id.sigma <- "1"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "1"; population_center <- T
         },
         "58" = { 
-          id.distr.X <- "4"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "4"; id.sigma <- "1"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "1"; population_center <- T
         },
         "59" = { 
-          id.distr.X <- "5"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "5"; id.sigma <- "1"; id.p <- "1"; id.theta <- "1"; id.rho <- "4"; id.W <- "1"; population_center <- T
         },
-        # check reproducibility for low dim results
         "60" = { 
-          id.distr.X <- "1"; id.sigma <- "1"; id.p <- "2"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "1"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- T
         },
         "61" = { 
-          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "2"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- T
         },
         "62" = { 
-          id.distr.X <- "3"; id.sigma <- "1"; id.p <- "2"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "3"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- T
         },
         "63" = { 
-          id.distr.X <- "4"; id.sigma <- "1"; id.p <- "2"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "4"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- T
         },
         "64" = { 
-          id.distr.X <- "5"; id.sigma <- "1"; id.p <- "2"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"
+          id.distr.X <- "5"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- T
         })
 
 n1 = 40
