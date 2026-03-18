@@ -5,6 +5,8 @@
 # 4. p: dimension
 # 5. rho: correlation coefficient for AR(1) covariance structure
 
+set.seed(2024)
+
 switch (id.model,
         #### unequal covariance
         # proportionally different covariance
@@ -202,6 +204,22 @@ switch (id.model,
         },
         "64" = { 
           id.distr.X <- "5"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- T
+        },
+        # original paper reproduction check
+        "65" = { 
+          id.distr.X <- "1"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- F
+        },
+        "66" = { 
+          id.distr.X <- "2"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- F
+        },
+        "67" = { 
+          id.distr.X <- "3"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- F
+        },
+        "68" = { 
+          id.distr.X <- "4"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- F
+        },
+        "69" = { 
+          id.distr.X <- "5"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- F
         })
 
 n1 = 40
@@ -214,7 +232,7 @@ p <- switch (id.p,
              "1" = 1000,
              "2" = 100)
 mu1 <- rep(0, p)
-mu2 <- c(rnorm(n=10, mean=0, sd=theta^2), rep(0, p-10))
+mu2 <- c(rnorm(n=10, mean=0, sd=theta^2), rep(0, p-10)) # 0.298 -0.147 -1.063 -0.341 -0.676 -0.384 -0.483 -0.346 -0.108 0.743
 rho <- switch (id.rho,
                "1" = 0.1,
                "2" = 0.3,

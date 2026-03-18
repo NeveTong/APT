@@ -15,6 +15,12 @@ optm_msda = function(sigma, delta, n, nlambda = 100, lambda.factor = ifelse((nob
   nvars = as.integer(dim(sigma)[2])
   nclass = as.integer(1)
   nk = as.integer(dim(delta)[1])
+  
+  ## Rescale to correlation matrix so Fortran loss_diff is exact                                                      
+  D_vec <- 1 / sqrt(diag(sigma))                                                                                      
+  D_mat <- diag(D_vec)                                                                                                
+  sigma_scaled <- D_mat %*% sigma %*% D_mat   # correlation matrix, diag = 1                                          
+  delta_scaled <- delta * rep(D_vec, each = nk) # rescale each column of delta
 
   ## parameter setup
   if (length(pf) != nvars) 
@@ -43,8 +49,8 @@ optm_msda = function(sigma, delta, n, nlambda = 100, lambda.factor = ifelse((nob
     ulam = as.double(rev(sort(lambda)))  #lambda is declining
     nlam = as.integer(length(lambda))
   }
-  ## call Fortran core
-  fit = .Fortran("msda", obj = double(nlam), nk, nvars, as.double(sigma), as.double(delta), 
+  ## call Fortran core with rescaled inputs   
+  fit = .Fortran("msda", obj = double(nlam), nk, nvars, as.double(sigma_scaled), as.double(delta_scaled), 
                   pf, dfmax, pmax, nlam, flmin, ulam, eps, maxit, sml, verbose, nalam = integer(1), 
                   theta = double(pmax * nk * nlam), itheta = integer(pmax), ntheta = integer(nlam), 
                   alam = double(nlam), npass = integer(1), jerr = integer(1))
