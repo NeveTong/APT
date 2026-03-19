@@ -5,7 +5,7 @@
 # 4. p: dimension
 # 5. rho: correlation coefficient for AR(1) covariance structure
 
-set.seed(2024)
+set.seed(123456)
 
 switch (id.model,
         #### unequal covariance

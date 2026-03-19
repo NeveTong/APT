@@ -28,7 +28,7 @@ sim = function(p, n1, n2, kap, sigma1, sigma2, mu1, mu2, obj_genX1, obj_genX2, p
   #                   MPT
   # ===============================================
   # NEED TO CHECK IF WE NEED DIFFERENT SEQUENCES FOR ar(rho) and cs(rho)
-  lambda.list = seq(1.5, 0.1, length=20)
+  lambda.list = exp(seq(log(5), log(0.01), length=100))
   
   fit_mpt_msda_ttest_no_rwt_bic = MPT_ttest_msda_no_rwt_bic(X1, X2, N1, N2, mu1, mu2, sigma1, sigma2, lambda.list, 
                                                             gammas1_true=obj_genX1$gammas, gammas2_true=obj_genX2$gammas)

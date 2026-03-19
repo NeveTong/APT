@@ -41,7 +41,7 @@ for (ind in c(60:64)) {
     results <- foreach::foreach(i = 1:n_rep, .combine = "rbind", .packages = c("highmean", "Hotelling")) %dopar% {
       
       set.seed(i)
-      
+
       data_all <- generate_data()
       obj_genX1 <- data_all$obj_genX1
       obj_genX2 <- data_all$obj_genX2
@@ -122,7 +122,7 @@ for (ind in c(60:64)) {
       APT_rej <- NA
       tryCatch({
         kap = 1/2
-        PT_APT = sim(p, n1, n2, kap, sigma1, sigma2, mu1, mu2, obj_genX1, obj_genX2)
+        PT_APT = sim(p, n1, n2, kap, sigma1, sigma2, mu1, mu2, obj_genX1, obj_genX2, population_center)
         PT_rej = PT_APT$rej_norwt[2]
         APT_rej = PT_APT$rej_rwt[2]
       }, error = function(e) {
