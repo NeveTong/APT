@@ -35,7 +35,23 @@ foreach::getDoParRegistered()
 foreach::getDoParWorkers()
 
 print(system.time({
-  results <- foreach::foreach(i = 1:n_rep, .combine = "rbind", .packages = c("highmean", "Hotelling")) %dopar% {
+  results <- foreach::foreach(i = 1:n_rep, .combine = "rbind",
+                              .packages = c("highmean", "Hotelling", "msda", "Matrix"),
+                              .export = c(
+                                # data generation
+                                "generate_data", "gen_vecX", "gen_gammas", "generate_skew_W",
+                                # PT/APT pipeline
+                                "sim", "MPT_ttest_msda_no_rwt_bic", "MPT_ttest_msda_rwt_bic",
+                                "SPT_ttest_msda_no_rwt_bic", "SPT_ttest_msda_rwt_bic",
+                                "optm_msda", "est_rose",
+                                "formatoutput", "err", "zeromat", "lamfix",
+                                # Li & Li (2021)
+                                "epval_UprojTwoSample", "UProj", "onesplit",
+                                # global parameters used inside functions
+                                "id.distr.X", "n1", "n2", "p",
+                                "mu1", "mu2", "dsigma1", "dsigma2",
+                                "sigma1", "sigma2", "W_skew"
+                              )) %dopar% {
     
     set.seed(i)
     
