@@ -339,6 +339,16 @@ gen_gammas = function(n, type=NULL, df=NULL){
   return(gammas)
 }
 
+# Expected value of gamma^2 for each distribution type (used for standardization)
+E_gamma_sq <- function(type, df=NULL) {
+  if (type == "Normal") return(1)
+  if (type == "T") return(df / (df - 2))
+  if (type == "Contaminated Normal1") return(0.9 * 1^2 + 0.1 * 5^2)  # 3.4
+  if (type == "Contaminated Normal2") return(0.9 * 1^2 + 0.1 * 3^2)  # 1.8
+  if (type == "Contaminated Normal3") return(0.9 * 1^2 + 0.1 * 10^2) # 10.9
+  stop("Unknown type for E_gamma_sq")
+}
+
 # Generate skew-normal W
 generate_skew_W <- function(n, p, dsigma, alpha = 3) {
   # Generate Z1 ~ N(0, Sigma)
@@ -368,7 +378,8 @@ generate_skew_W <- function(n, p, dsigma, alpha = 3) {
 
 
 # Generate X
-gen_vecX = function(n, p, mu, dsigma, type=NULL, df=NULL, W_skew = F){
+gen_vecX = function(n, p, mu, dsigma, type=NULL, df=NULL, W_skew = F, 
+                    standardize_gamma = FALSE){
   # ------------------------------------------------------------
   # Input:
   #       - n: sample size; a scalar
@@ -387,6 +398,9 @@ gen_vecX = function(n, p, mu, dsigma, type=NULL, df=NULL, W_skew = F){
   
   # Generate gammas
   gammas = gen_gammas(n, type=type, df=df)
+  if (standardize_gamma) {
+    gammas <- gammas / sqrt(E_gamma_sq(type, df))
+  }
   # Generate W's
   if (W_skew){
     W = generate_skew_W(n, p, dsigma)

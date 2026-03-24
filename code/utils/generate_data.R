@@ -19,6 +19,12 @@ generate_data <- function() {
          "5" = { # contaminated normal distribution CN2
            obj_genX1 <- gen_vecX(n1, p, mu1, dsigma1, type = "Contaminated Normal3", W_skew = W_skew)
            obj_genX2 <- gen_vecX(n2, p, mu2, dsigma2, type = "Contaminated Normal3", W_skew = W_skew)
+         },
+         "6" = { # heterogeneous: X1 ~ t6, X2 ~ CN1, both with standardized gamma
+           obj_genX1 <- gen_vecX(n1, p, mu1, dsigma1, type = "T", df=6,
+                                 W_skew = W_skew, standardize_gamma = TRUE)
+           obj_genX2 <- gen_vecX(n2, p, mu2, dsigma2, type = "Contaminated Normal1",
+                                 W_skew = W_skew, standardize_gamma = TRUE)
          })
   
   return(list(obj_genX1 = obj_genX1,
