@@ -379,7 +379,7 @@ generate_skew_W <- function(n, p, dsigma, alpha = 3) {
 
 # Generate X
 gen_vecX = function(n, p, mu, dsigma, type=NULL, df=NULL, W_skew = F, 
-                    standardize_gamma = FALSE){
+                    standardize_gamma = FALSE, target_Egamma_sq = NULL){
   # ------------------------------------------------------------
   # Input:
   #       - n: sample size; a scalar
@@ -400,6 +400,10 @@ gen_vecX = function(n, p, mu, dsigma, type=NULL, df=NULL, W_skew = F,
   gammas = gen_gammas(n, type=type, df=df)
   if (standardize_gamma) {
     gammas <- gammas / sqrt(E_gamma_sq(type, df))
+  }
+  if (!is.null(target_Egamma_sq)) {
+    # Rescale gammas so that E[gamma^2] = target_Egamma_sq
+    gammas <- gammas * sqrt(target_Egamma_sq / E_gamma_sq(type, df))
   }
   # Generate W's
   if (W_skew){

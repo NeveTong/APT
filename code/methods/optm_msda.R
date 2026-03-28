@@ -2,7 +2,8 @@
 
 optm_msda = function(sigma, delta, n, nlambda = 100, lambda.factor = ifelse((nobs - nclass) <= nvars, 0.2, 1e-03), 
                      lambda = NULL, dfmax = nobs, pmax = min(dfmax * 2 + 20, nvars), pf = rep(1, nvars), 
-                     eps = 1e-04, maxit = 1e+06, sml = 1e-06, verbose = FALSE, perturb = NULL) {
+                     eps = 1e-04, maxit = 1e+06, sml = 1e-06, verbose = FALSE, perturb = NULL, 
+                     iter = NULL, M_ind = NULL){ 
   ## data setup
   this.call = match.call()
   # tmp = msda.prep(x, y)
@@ -16,7 +17,11 @@ optm_msda = function(sigma, delta, n, nlambda = 100, lambda.factor = ifelse((nob
   nclass = as.integer(1)
   nk = as.integer(dim(delta)[1])
   
-  ## Rescale to correlation matrix so Fortran loss_diff is exact                                                      
+  ## Rescale sigma to correlation matrix and delta accordingly.
+  ## The Fortran core works with any positive definite sigma, but rescaling
+  ## puts all variables on the same scale so the L1 penalty (with pf = 1)
+  ## penalizes each coordinate equally. Without this, variables with larger
+  ## marginal variance would be penalized less, biasing the sparse estimate.                                                
   D_vec <- 1 / sqrt(diag(sigma))                                                                                      
   D_mat <- diag(D_vec)                                                                                                
   sigma_scaled <- D_mat %*% sigma %*% D_mat   # correlation matrix, diag = 1                                          
@@ -54,6 +59,8 @@ optm_msda = function(sigma, delta, n, nlambda = 100, lambda.factor = ifelse((nob
                   pf, dfmax, pmax, nlam, flmin, ulam, eps, maxit, sml, verbose, nalam = integer(1), 
                   theta = double(pmax * nk * nlam), itheta = integer(pmax), ntheta = integer(nlam), 
                   alam = double(nlam), npass = integer(1), jerr = integer(1))
+  # saveRDS(fit, file = paste0(path.output, "raw/model_57/fit/", iter, "_", M_ind, ".rds"))
+  
   ## output: fit, maxit, pmax, nvars, vnames, nk
   outlist = formatoutput(fit, maxit, pmax, nvars, vnames, nk)
   outlist = c(outlist, list(npasses = fit$npass, jerr = fit$jerr, 

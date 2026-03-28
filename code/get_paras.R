@@ -221,7 +221,7 @@ switch (id.model,
         "69" = { 
           id.distr.X <- "5"; id.sigma <- "1"; id.p <- "1"; id.theta <- "2"; id.rho <- "4"; id.W <- "1"; population_center <- F
         },
-        # heterogeneous gamma: X ~ t6, Y ~ CN1 (standardized)
+        # heterogeneous gamma: X ~ t3 (raw), Y ~ CN1 (rescaled to match t3 covariance)   
         "70" = {
           id.distr.X <- "6"; id.sigma <- "1"; id.p <- "1"; id.theta <- "1"; id.rho <- "1"; id.W <- "1"; population_center <- F
         },
